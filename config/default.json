@@ -1,0 +1,50 @@
+{
+
+  /** 
+   * Generic Exchange Settings 
+   */
+  "gex": {
+    // Debug log level:
+    // 0:never
+    // 1:debug Layer1 (Direct public IF)
+    // 2:debug Layer2 (Service)
+    // 3:debug Layer3 (DAO etc)
+    "debugLevel": 3,
+
+    // !NOTICE! Change below DB settings according to your environment!
+    // DB settings:
+    "dbOpts": {
+      "connectionLimit": 100,
+      "host": "localhost",
+      "port": 3306,
+      "user": "mysql",
+      "password": "mysql",
+      "database": "gex"
+    },
+
+    // API server settings:
+    "apiServer": {
+      "host": "127.0.0.1",
+      "port": 3001
+    },
+
+    // Logger settings:
+    "logging": {
+      "console": {
+        "level": "debug", // { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 }
+      },
+      "file": {
+        "level": "debug",
+        "dir": "log/",
+        "category": {
+          "default": {
+            "dir": "log/"
+          }
+        },
+        "filename": "gas.log", // outputs ./log/<yyyyMMdd>-gas.log
+        "dailyDatePattern": "yyyyMMdd-"
+      }
+    }
+  }
+
+}
