@@ -177,6 +177,8 @@ $ node cli/ping.js
 
 - GAS is a JSON RPC server, thus you can use your favorite RPC client (of course, including `curl`) to call its methods.
 - GAS allows clients to access from *localhost* only by default.
+- If it logs `ERROR: !!!!! errorHandler middleware caught error: Error: Cannot find module '../encodings'` and does not run, [this solution](https://github.com/ashtuchkin/iconv-lite/issues/118#issuecomment-267811928) will help you.
+
 
 ## For security
 

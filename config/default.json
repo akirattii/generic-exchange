@@ -31,7 +31,7 @@
     // Logger settings:
     "logging": {
       "console": {
-        "level": "debug", // { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 }
+        "level": "debug", // "error", "warn", "info", "verbose", "debug", "silly"
       },
       "file": {
         "level": "debug",
