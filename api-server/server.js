@@ -23,7 +23,7 @@ logger.info(`\n\n
 
 process.on('uncaughtException', function(err) {
   if (err) {
-    logger.error(`!!! Aborting in 1 second later on uncaughtException! err.stack:`, err.stack);
+    logger.error("!!! Aborting in 1 second later on uncaughtException! err:", err, err.stack);
     setTimeout(() => {
       process.exit(1);
     }, 1000);
