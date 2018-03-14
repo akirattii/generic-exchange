@@ -5,6 +5,7 @@ const apiMap = [
   { method: "getOffers", js: apiJsDirPath + "offer.js" },
   { method: "makeOffer", js: apiJsDirPath + "offer.js" },
   { method: "cancelOffer", js: apiJsDirPath + "offer.js" },
+  { method: "upsertOtcOffer", js: apiJsDirPath + "offer.js" },
   { method: "getContracts", js: apiJsDirPath + "contract.js" },
   { method: "getUserTransfers", js: apiJsDirPath + "transfer.js" },
   { method: "getTransfers", js: apiJsDirPath + "transfer.js" },

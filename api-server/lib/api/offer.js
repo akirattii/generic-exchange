@@ -1,16 +1,16 @@
 const ParamUtil = require('../param-util.js');
 
 /**
-* Get offers
-* @param {Array} - one element's array of json rpc param:
-*  - base {String} - base ccy
-*  - counter {String} - counter ccy
-*  - userId {Number} - [optional] user's ID
-*  - cursor {Number} - [optional] database result's cursor position.defaults to 0.
-*  - limit {Number} - [optional] one side count of buy/sell offers
-*/
+ * Get offers
+ * @param {Array} - one element's array of json rpc param:
+ *  - base {String} - base ccy
+ *  - counter {String} - counter ccy
+ *  - userId {Number} - [optional] user's ID
+ *  - cursor {Number} - [optional] database result's cursor position.defaults to 0.
+ *  - limit {Number} - [optional] one side count of buy/sell offers
+ */
 module.exports.getOffers = function(args, cb) {
-	const param = args[0];
+  const param = args[0];
 
   gex.getOffers(param, (err, result) => {
     if (err) return cb && cb(err);
@@ -65,3 +65,27 @@ module.exports.cancelOffer = function(args, cb) {
   });
 };
 
+
+/**
+ * Inserts or updates a new otc_offer
+ * @param {Array} - one element's array of json rpc param. new otc_offer model to insert/update:
+ * - userId {Number} - generally it's a OTC Sales provider's admin userId
+ * - base {String} - base currency
+ * - counter {String} - counter currency
+ * - buysell {Number} - buy/sell flag. sell:-1, buy:1
+ * - price {Number} - price of base ccy
+ * - qty {Number} - quantity of base ccy to be provided
+ * - remaining {Number} - remaining quantity of base ccy to be provided
+ * - cancelled {Number} - 1:cancelled, 0:not_cancelled
+ */
+module.exports.upsertOtcOffer = function(args, cb) {
+  const param = args[0];
+
+  gex.upsertOtcOffer(param, (err, result) => {
+    if (err) return cb && cb(err);
+    // const props2delete = [];
+    // ParamUtil.deleteProps(result, props2delete);
+    // NOTE: for json rpc response, `err` must be this style: { code:<int>, message:<string>, [name:<string>] }
+    return cb && cb(err, result);
+  });
+};

@@ -72,7 +72,7 @@ It is assuming below:
 git clone this project and npm install:
 
 ```
-$ git clone git@github.com:akirattii/generic-exchange.git
+$ git clone https://github.com/akirattii/generic-exchange.git
 $ cd generic-exchange
 $ npm install
 ```
