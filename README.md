@@ -595,7 +595,23 @@ Above means that this tx affected to:
 
 ### Price and Quantity
 
-On GEX world, `price` is available *the 2nd decimal place*, while `qty` (quantity) is *integer*. Thus, if your exchange wants to treat any cryptocurrency such as BTC, `qty` should treat as *satoshis* value but not *BTC*.
+On GEX world, `price` is available *the 2nd decimal place*, while `qty` (quantity) is *integer*. Thus, if your exchange wants to treat any cryptocurrency such as BTC, `qty` should treat as *satoshis* value but not *BTC*. 
+  
+#### Best practice of `qty` handling
+If your service supports either any cryptocurrency such as BTC and any fiat, it might be simple that all of them are handled as number of 8 decimal place conforming with BTC. In that case, even if a `qty` means a quanitity of any **fiat**, they should be multiplied by 100000000 before insert it into GEX database because `qty` column is `BIGINT` type but not any decimal's.
+
+For example, if you will save *3 USD* value into GEX DB, you have to multiple it by 100000000 before do that.
+
+- *3 USD* is expressed on the DB like this: `300000000`
+
+On the case that you save *0.00000003 BTC* (3 satoshis) value into the DB:
+
+- *0.00000003 BTC* is expressed on the DB like this: `3`
+
+And on the case that you save *0.000003 XRP* (3 drops) value into the DB:
+
+- *0.000003 XRP* is expressed on the DB like this: `300`
+
 
 ### Pagination
 
