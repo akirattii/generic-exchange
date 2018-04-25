@@ -77,11 +77,29 @@ module.exports.getLogger = function(category) {
     cfgRoot.logging.file.category[category].dir :
     cfgRoot.logging.file.category[DEFAULT_CATEGORY].dir;
 
-  logger[category] = new(winston.Logger)({
-    transports: [
-      //
-      // -- log to Console
-      //
+  const transports = [];
+
+  //
+  // -- log to File daily rotated
+  //
+  transports.push(
+    new DailyRotateFile({
+      level: cfgRoot.logging.file.level,
+      filename: logdir + cfgRoot.logging.file.filename,
+      datePattern: cfgRoot.logging.file.dailyDatePattern,
+      prepend: true,
+      json: false,
+      timestamp: function() {
+        return new Date().toLocaleString();
+      },
+      formatter: formatter,
+    }));
+
+  if (process.env.NODE_ENV !== "production") {
+    //
+    // -- log to Console
+    //
+    transports.push(
       // new winston.transports.Console({
       new winston.transports.Console({
         level: cfgRoot.logging.console.level,
@@ -90,30 +108,11 @@ module.exports.getLogger = function(category) {
           return new Date().toLocaleString();
         },
         formatter: coloredFormatter,
-      }),
-      //
-      // -- log to File daily rotated
-      //
-      new DailyRotateFile({
-        level: cfgRoot.logging.file.level,
-        filename: logdir + cfgRoot.logging.file.filename,
-        datePattern: cfgRoot.logging.file.dailyDatePattern,
-        prepend: true,
-        json: false,
-        timestamp: function() {
-          return new Date().toLocaleString();
-        },
-        formatter: formatter,
-      })
-      // //
-      // // -- log to File
-      // //
-      // new winston.transports.File({
-      //   filename: cfgRoot.logging.file.dir + cfgRoot.logging.file.filename,
-      //   level: cfgRoot.logging.file.level,
-      //   maxsize: 1024 * 1024 * 10 // 10MB
-      // }),
-    ]
+      }));
+  }
+
+  logger[category] = new(winston.Logger)({
+    transports
   });
 
   return logger[category];
