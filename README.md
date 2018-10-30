@@ -27,7 +27,6 @@ This software is currently **under BETA version**. This project is just my hobby
 - [Integration for your webapp](#integration-for-your-webapp)
     - [Join with your webapp](#join-with-your-webapp)
     - [Code example](#code-example)
-    - [Demo](#demo)
 - [Technical document](#technical-document)
     - [Examples of API Call](#examples-of-api-call)
         - [Server](#server)
@@ -270,11 +269,6 @@ function checkGasAlive(cb) {
   });
 }
 ```
-
-#### Demo
-
-Here is [demo](http://gex-demo.appri.me) which runs on the poorest spec of a VPS...
-
 
 ## Technical Document
 
